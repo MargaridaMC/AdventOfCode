@@ -1,8 +1,4 @@
-from dataclasses import dataclass
-from telegram import SendTelegramMessage
-import numpy as np
 from aocd import get_data
-from tqdm import tqdm
 import pandas as pd
 
 calculation_matrix = pd.DataFrame(columns = ["2", "1", "0", "-", "="], index = ["2", "1", "0", "-", "="])
