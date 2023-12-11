@@ -1,0 +1,39 @@
+from aocd import get_data
+import numpy as np
+import itertools
+
+input = ['...#......',
+'.......#..',
+'#.........',
+'..........',
+'......#...',
+'.#........',
+'.........#',
+'..........',
+'.......#..',
+'#...#.....']
+input = get_data(day=11).splitlines()
+
+input = np.array([[l for l in row] for row in input])
+galaxy_map = (input == '#').astype(int)
+
+galaxy_x_coords, galaxy_y_coords = np.where(galaxy_map)
+galaxy_coords = zip(galaxy_x_coords, galaxy_y_coords)
+
+def calculate_sum_of_galaxy_distance(galaxy_coords, empty_space_factor):
+    distance_sum = 0
+    for galaxy1, galaxy2 in itertools.combinations(galaxy_coords, 2):
+        pair_distance = 0
+        start_x, end_x = min(galaxy1[0], galaxy2[0]) + 1, max(galaxy1[0], galaxy2[0]) + 1
+        for i in range(start_x, end_x):
+            if (galaxy_map[i] == 0).all(): pair_distance += empty_space_factor
+            else: pair_distance += 1
+        start_y, end_y = min(galaxy1[1], galaxy2[1]) + 1, max(galaxy1[1], galaxy2[1]) + 1
+        for j in range(start_y, end_y):
+            if (galaxy_map[:, j] == 0).all(): pair_distance += empty_space_factor
+            else: pair_distance += 1
+        distance_sum += pair_distance
+    return distance_sum
+
+#print("Part 1: Distance sum:", calculate_sum_of_galaxy_distance(galaxy_coords, 2))
+print("Part 2: Distance sum:", calculate_sum_of_galaxy_distance(galaxy_coords, 1000000))
