@@ -1,8 +1,6 @@
 from aocd import get_data
 import numpy as np
 from time import time
-from tqdm import tqdm
-from functools import cache
 
 start_time = time()
 """
