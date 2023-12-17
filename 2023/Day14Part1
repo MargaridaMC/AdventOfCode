@@ -1,0 +1,69 @@
+from aocd import get_data
+import numpy as np
+from time import time
+
+start_time = time()
+"""
+with open("input.txt", "r") as f:
+    input = f.read().splitlines()
+"""
+input = get_data(day=14).splitlines()
+
+input = [[e for e in l] for l in input]
+
+SPACE = 0
+ROUND_ROCK = 1
+FIXED_ROCK = 2
+
+# Convert input into array of ints
+rocks = np.array(input)
+rocks[rocks == '.'] = SPACE
+rocks[rocks == 'O'] = ROUND_ROCK
+rocks[rocks == '#'] = FIXED_ROCK
+rocks = rocks.astype(int)
+
+original_rocks = rocks.copy()
+
+n_rows, n_cols = rocks.shape
+
+def print_map(m):
+    string_map = m.copy().astype(str)
+    string_map[string_map == str(SPACE)] = '.'
+    string_map[string_map == str(ROUND_ROCK)] = 'O'
+    string_map[string_map == str(FIXED_ROCK)] = '#'
+
+    for r in range(len(m)):
+        print(''.join(string_map[r]))
+
+def calculate_load(m):
+    n_rows, n_cols = m.shape
+    load_per_row = (np.array(range(n_rows)[::-1]) + 1).reshape((n_rows, 1))
+    return ((m == ROUND_ROCK) * load_per_row).sum()
+
+
+for c in range(n_cols):
+
+    free_space_pointer = 0
+    while free_space_pointer < n_rows:
+
+        # If there are round rocks or fixed rocks at the top of this column then just move the pointer to after them
+        while free_space_pointer < n_rows and (rocks[free_space_pointer, c] == ROUND_ROCK or rocks[free_space_pointer, c] == FIXED_ROCK):
+            free_space_pointer+=1
+        
+        # Then while we don't hit a fixed rock or the end of the column move all round rocks up
+        i = free_space_pointer + 1
+        while i < n_rows and rocks[i, c] != FIXED_ROCK:
+            if rocks[i, c] == ROUND_ROCK:
+                rocks[free_space_pointer, c] = ROUND_ROCK
+                rocks[i, c] = SPACE
+                free_space_pointer += 1
+            i += 1
+
+        free_space_pointer = i+1
+            
+#print_map(rocks)
+load = calculate_load(rocks)
+print("Total load:", load)
+
+end_time = time()
+print(f"Calculated solution in {end_time - start_time} seconds")
