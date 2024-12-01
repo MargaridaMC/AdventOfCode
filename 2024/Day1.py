@@ -14,5 +14,5 @@ print(f"Part 1 solution: {diff}")
 
 # Part 2
 l2_number_count = Counter(l2)
-similarity_score = sum(n * l2_number_count[n] for n in set(l1))
+similarity_score = sum(n * l2_number_count[n] for n in l1)
 print(f"Part 2 solution: {similarity_score}")
