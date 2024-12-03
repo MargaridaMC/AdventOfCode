@@ -1,16 +1,10 @@
-import argparse
+from utils import get_arg_parser, read_data
 import numpy as np
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--sample", action="store_true")
+parser = get_arg_parser()
 args = parser.parse_args()
+data = read_data(2, args.sample)
 
-if args.sample:
-    with open("day2_test_input.txt") as f:
-        data = f.read().splitlines()
-else:
-    with open("day2_input.txt") as f:
-        data = f.read().splitlines()
 data = list(list(map(int, row.split(" "))) for row in data)
 
 def check_report_is_safe(report):
