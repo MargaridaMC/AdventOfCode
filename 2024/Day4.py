@@ -1,7 +1,7 @@
 import numpy as np
 
 def parse_input(data):
-    return np.array([[letter for letter in row] for row in data])
+    return np.array([[letter for letter in row] for row in data.splitlines()])
 
 def check_letter_in_position(letter_map, x, y, expected_letter):
     max_x, max_y = letter_map.shape

@@ -4,10 +4,10 @@ from time import time
 def read_data(day: int, sample: bool = False):
     if sample:
         with open(f"day{day}_test_input.txt") as f:
-            data = f.read().splitlines()
+            data = f.read()
     else:
         with open(f"day{day}_input.txt") as f:
-            data = f.read().splitlines()
+            data = f.read()
     return data
 
 def import_code_part1(day):

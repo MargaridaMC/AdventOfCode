@@ -6,7 +6,8 @@ def check_report_is_safe(report):
     return (all(consecutive_diff >= 1) and all(consecutive_diff <= 3)) or (all(consecutive_diff >= -3) and all(consecutive_diff <= -1))
 
 def parse_data(data):
-    return list(list(map(int, row.split(" "))) for row in data)
+    return list(list(map(int, row.split(" "))) for row in data.splitlines())
+
 def part1(data):
 
     data = parse_data(data)

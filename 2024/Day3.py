@@ -1,7 +1,6 @@
 import re
 
 def part1(data):
-    data = data[0]
 
     # Extract relevant matches from the input string
     matches = re.findall(r"mul\(\d+,\d+\)", data)
@@ -14,7 +13,6 @@ def part1(data):
     return result
 
 def part2(data):
-    data = data[0]
 
     matches = re.findall(r"(mul\(\d+,\d+\)|do\(\)|don't\(\))", data)
     result = 0
