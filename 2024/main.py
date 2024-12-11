@@ -128,15 +128,16 @@ def main(day: int, sample: bool, skip_part1: bool = False):
 
     data = read_data(day, sample)
 
-    try:
-        part1 = import_code_part1(day)
-        part1_result, run_time = run_w_time(part1, data)
-        print(f"Part 1 result: {part1_result}")
-        print(f"Running time: {run_time:.3f}s")
-        print()
-    except ImportError:
-        print(f"Day {day} part 1 not implemented")
-        return
+    if not skip_part1:
+        try:
+            part1 = import_code_part1(day)
+            part1_result, run_time = run_w_time(part1, data)
+            print(f"Part 1 result: {part1_result}")
+            print(f"Running time: {run_time:.3f}s")
+            print()
+        except ImportError:
+            print(f"Day {day} part 1 not implemented")
+            return
     
     try:
         part2 = import_code_part2(day)
@@ -155,4 +156,4 @@ if __name__ == "__main__":
     parser.add_argument("--skip_part1", "-s1", action="store_true")
     args = parser.parse_args()
 
-    main(args.day, args.sample)
+    main(args.day, args.sample, args.skip_part1)
