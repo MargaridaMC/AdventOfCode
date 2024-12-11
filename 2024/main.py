@@ -124,7 +124,7 @@ def run_w_time(func, data):
     end_time = time()
     return result, end_time - start_time
 
-def main(day: int, sample: bool):
+def main(day: int, sample: bool, skip_part1: bool = False):
 
     data = read_data(day, sample)
 
@@ -152,6 +152,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample", action="store_true")
     parser.add_argument("--day", "-d", type=int)
+    parser.add_argument("--skip_part1", "-s1", action="store_true")
     args = parser.parse_args()
 
     main(args.day, args.sample)
