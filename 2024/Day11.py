@@ -18,10 +18,7 @@ def run(data, n_blinks):
         new_stones = dict()
         for stone, repeat_count in stones.items():
             for new_stone in transform_stone(stone):
-                if new_stone not in new_stones:
-                    new_stones[new_stone] = repeat_count
-                else:
-                    new_stones[new_stone] += repeat_count
+                new_stones[new_stone] = new_stones.get(new_stone, 0) + repeat_count
         stones = new_stones.copy()
 
     return sum(stones.values())
