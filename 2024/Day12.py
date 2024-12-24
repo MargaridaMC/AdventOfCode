@@ -3,15 +3,13 @@ import random
 from data_parsing import parse_input_to_np_2d_array
 from colorama import Back, Style
 
+from common_methods import check_map_value_in_pos
+
 DIRECTIONS =  [(0, 1), (1, 0), (-1, 0), (0, -1)]
 PERPENDICULAR_DIRECTIONS = {(0, 1): (1, 0), (1, 0): (0, 1), (-1, 0): (0, 1), (0, -1): (1, 0)}
 
 def parse_input(data):
     return parse_input_to_np_2d_array(data)
-
-def check_position_value_in_map(x, y, garden_map, expected_value):
-    rows, cols = garden_map.shape
-    return 0 <= x < rows and 0 <= y < cols and garden_map[x, y] == expected_value
 
 def print_map(garden_map, plant_patch_locations, zoom_in = False):
 
@@ -56,7 +54,7 @@ def part1(data):
             
             for dir in DIRECTIONS:
                 new_pos = (seed[0] + dir[0], seed[1] + dir[1])
-                if check_position_value_in_map(new_pos[0], new_pos[1], garden_map, plant_in_patch):
+                if check_map_value_in_pos(new_pos[0], new_pos[1], garden_map, plant_in_patch):
                     if new_pos not in visited_positions:
                         seeds.append(new_pos)
                         visited_positions.add(new_pos)
@@ -100,7 +98,7 @@ def part2(data):
             
             for dir in DIRECTIONS:
                 new_pos = (seed[0] + dir[0], seed[1] + dir[1])
-                if check_position_value_in_map(new_pos[0], new_pos[1], garden_map, plant_in_patch):
+                if check_map_value_in_pos(new_pos[0], new_pos[1], garden_map, plant_in_patch):
                     if new_pos not in visited_positions:
                         seeds.append(new_pos)
                         visited_positions.add(new_pos)

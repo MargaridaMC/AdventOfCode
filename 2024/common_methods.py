@@ -47,3 +47,7 @@ def get_shortest_path_from_matrix(allowed_map_locations, start_pos, end_pos) -> 
 
         # Sort distance list by distance
         distances = sorted(distances, key=lambda x: x[1])
+
+def check_map_value_in_pos(x, y, value_map, expected_value):
+    rows, cols = value_map.shape
+    return 0 <= x < rows and 0 <= y < cols and value_map[x, y] == expected_value
