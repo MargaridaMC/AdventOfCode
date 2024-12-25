@@ -41,7 +41,7 @@ def get_shortest_path_from_matrix(allowed_map_locations: np.array, start_pos: tu
                 distances.append((next_position, closest_distance + 1))
                 previous_nodes[next_position] = closest_position
                 checked_positions[*next_position] = 1
-        print(checked_positions)
+
         if len(distances) == 0:
             return None
 
