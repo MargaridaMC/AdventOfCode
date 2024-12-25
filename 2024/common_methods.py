@@ -1,11 +1,11 @@
 import numpy as np
 
-def get_shortest_path_from_matrix(allowed_map_locations, start_pos, end_pos) -> list | None:
+def get_shortest_path_from_matrix(allowed_map_locations: np.array, start_pos: tuple[int, int], end_pos: tuple[int, int]) -> list[tuple[int, int]] | None:
     
     """
     Uses the Djisktra algorithm to find the length of the shortest path between two points on a 2D grid.
     Args:
-        allowed_map_locations (np.array): A 2D grid where 0 represents an allowed location and 1 represents a wall.
+        allowed_map_locations (np.array): A 2D grid where 1 (or True) represents an allowed location and 0 (or False) represents a wall.
         start_pos (tuple): A tuple representing the starting position (x, y) on the grid.
         end_pos (tuple): A tuple representing the ending position (x, y) on the grid.
     Returns:
@@ -33,7 +33,7 @@ def get_shortest_path_from_matrix(allowed_map_locations, start_pos, end_pos) -> 
         for (x_dir, y_dir) in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
             next_position = (closest_position[0] + x_dir, closest_position[1] + y_dir)
             
-            if 0 <= next_position[0] < rows and 0 <= next_position[1] < cols and allowed_map_locations[*next_position] != 1 and checked_positions[*next_position] == 0:
+            if 0 <= next_position[0] < rows and 0 <= next_position[1] < cols and allowed_map_locations[*next_position] and checked_positions[*next_position] == 0:
                 if next_position == end_pos:
                     previous_nodes[next_position] = closest_position
                     return reorder_path(previous_nodes)
@@ -41,7 +41,7 @@ def get_shortest_path_from_matrix(allowed_map_locations, start_pos, end_pos) -> 
                 distances.append((next_position, closest_distance + 1))
                 previous_nodes[next_position] = closest_position
                 checked_positions[*next_position] = 1
-        
+        print(checked_positions)
         if len(distances) == 0:
             return None
 

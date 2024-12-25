@@ -57,7 +57,7 @@ def run(data, max_cheat_len, saving_lower_bound):
 
     # First of all get the length of the shortest path between the start and end positions
     # Given the setup of the map, there is only one possible path anyway, but it's helpful to know the order in which the positions are visited
-    shortest_path = get_shortest_path_from_matrix(race_map, start_pos, end_pos)
+    shortest_path = get_shortest_path_from_matrix(race_map == MapValues.TRACK.value, start_pos, end_pos)
 
     # Now we try to cheat in each of the track positions
     pico_seconds_saved = []

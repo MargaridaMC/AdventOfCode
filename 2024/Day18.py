@@ -23,7 +23,7 @@ def part1(data):
         memory_map[x, y] = 1
 
     # Then get the shortest path
-    return len(get_shortest_path_from_matrix(memory_map, START_POS, END_POS))
+    return len(get_shortest_path_from_matrix(memory_map == 0, START_POS, END_POS))
 
 def part2(data):
     memory_map = np.zeros((ROWS, COLS), dtype=int)
@@ -37,6 +37,6 @@ def part2(data):
         if i < N_CORRUPTED_BYTES:
             continue
 
-        shortest_path = get_shortest_path_from_matrix(memory_map, START_POS, END_POS)
+        shortest_path = get_shortest_path_from_matrix(memory_map == 0, START_POS, END_POS)
         if shortest_path is None:
             return y, x
